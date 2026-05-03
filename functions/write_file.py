@@ -1,4 +1,5 @@
 import os
+from google.genai import types
 
 def write_file(working_directory, file_path, content):
     try:
@@ -23,3 +24,22 @@ def write_file(working_directory, file_path, content):
     except Exception as e:
 		# runs ONLY if something inside the try block raised
 	    return f"Error: {e}"
+    
+schema_write_file = types.FunctionDeclaration(
+    name="write_file",
+    description="Writes files within the working directory",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="Writes files within the working directory",
+            ),
+            "content": types.Schema(
+                type=types.Type.STRING,
+                description="Writes files within the working directory",
+            )
+        },
+        required=["file_path", "content"],
+    ), 
+)
